@@ -21,6 +21,8 @@ void Application::Start() {
 		std::cout << "Failzed to initialize glad\n";
 		return;
 	}
+
+	AssetLoader::Get().LoadAssets();
 }
 
 void Application::Update()
