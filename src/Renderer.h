@@ -11,18 +11,11 @@
 ///</summary>
 class AssetLoader {
 public:
-	static AssetLoader Get() {
-		if (&instance == NULL)
-			instance = AssetLoader();
-		return instance;
-	}
-	void LoadAssets();
+
+	static void LoadAssets();
+	static unsigned int GetShader(std::string shaderFileName);
 private:
-	AssetLoader() = default;
-	static AssetLoader instance;
-	std::unordered_map<std::string, Shader*>shaders;
-	std::string vertexShadersDir = "src/Shaders/Vertex";
-	std::string fragmentShadersDir = "src/Shaders/Fragment";
+	static std::unordered_map<std::string, unsigned int>shaders;
 };
 
 

@@ -21,7 +21,7 @@ private:
 class ShaderProgram :RendererObject {
 public:
 	//Creates a shader program and links it's shaders
-	ShaderProgram(Shader vertexShader, Shader fragmentShader);
+	ShaderProgram(unsigned int vertexShader, unsigned int fragmentShader);
 	~ShaderProgram();
 	//Set it as the current active shader program
 	void Bind()const;

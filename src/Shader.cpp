@@ -48,12 +48,12 @@ void Shader::ValidateShader() const
 	}
 }
 
-ShaderProgram::ShaderProgram(Shader vertexShader, Shader fragmentShader)
+ShaderProgram::ShaderProgram(unsigned int vertexShader, unsigned int fragmentShader)
 {
 	//Creates a shader program and attaches the vertex and fragment shader
 	object_id = glCreateProgram();
-	glAttachShader(object_id, vertexShader.GetShader());
-	glAttachShader(object_id, fragmentShader.GetShader());
+	glAttachShader(object_id, vertexShader);
+	glAttachShader(object_id, fragmentShader);
 
 	glLinkProgram(object_id);
 	Validate();

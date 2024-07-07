@@ -22,7 +22,7 @@ void Application::Start() {
 		return;
 	}
 
-	AssetLoader::Get().LoadAssets();
+	AssetLoader::LoadAssets();
 }
 
 void Application::Update()
