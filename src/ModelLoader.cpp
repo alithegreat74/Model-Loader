@@ -5,13 +5,32 @@ Mesh::Mesh(std::vector<Vertex> verticies, std::vector<unsigned int> indicies, st
 {
 	this->vericies = verticies;
 	this->indicies = indicies;
-	
+	this->textures = textures;
 
 	SetupMesh();
 }
 
 void Mesh::Draw(ShaderProgram& shader)
 {
+	unsigned int diffuseNr = 1;
+	unsigned int specularNr = 1;
+	for (unsigned int i = 0; i < textures.size(); i++)
+	{
+		glActiveTexture(GL_TEXTURE0 + i); // activate proper texture unit before binding
+		// retrieve texture number (the N in diffuse_textureN)
+		std::string number;
+		std::string name = textures[i].type;
+		if (name == "texture_diffuse")
+			number = std::to_string(diffuseNr++);
+		else if (name == "texture_specular")
+			number = std::to_string(specularNr++);
+
+		shader.ChangeSingleUniform((name + number).c_str(), (int)i);
+		glBindTexture(GL_TEXTURE_2D, textures[i].id);
+	}
+	glActiveTexture(GL_TEXTURE0);
+
+
 	glBindVertexArray(vao);
 	glDrawElements(GL_TRIANGLES, indicies.size(), GL_UNSIGNED_INT, NULL);
 	glBindVertexArray(0);
@@ -149,8 +168,8 @@ std::vector<Texture> Model::LoadTextures(aiMaterial* mat, aiTextureType textureT
 unsigned int TextureFromFile(const char* path, const std::string& directory)
 {
 	std::string filename = std::string(path);
-	filename = directory + '/' + filename;
-
+	if(filename.find(':')==filename.npos)
+		filename = directory + "\\" + filename;
 	unsigned int textureID;
 	glGenTextures(1, &textureID);
 

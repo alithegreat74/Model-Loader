@@ -27,7 +27,9 @@ void Application::Start() {
 	glEnable(GL_DEPTH_TEST);
 	glClear(GL_DEPTH_BUFFER_BIT| GL_COLOR_BUFFER_BIT);
 
-	model = new Model("src/Models/soldier/nanosuit.obj");
+	
+
+	model = new Model("E:/3D Models/shogun/source/shogun.fbx");
 	program = new ShaderProgram(AssetLoader::GetShader("VertexShader.glsl"), AssetLoader::GetShader("FragmentShader.glsl"));
 	
 }
@@ -35,14 +37,16 @@ void Application::Start() {
 void Application::Update()
 {
 	glm::mat4 md(1.0f);
-	md = glm::translate(md, glm::vec3(0.0f, -1.0f, 0.0f));
-	md = glm::scale(md, glm::vec3(0.1f, 0.1f, 0.1f));
+	//md = glm::translate(md, glm::vec3(0.0f, -1.0f, 0.0f));
+	md = glm::scale(md, glm::vec3(0.5f, 0.5f, 0.5f));
+	md = glm::rotate(md, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+	md = glm::rotate(md, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 	program->ChangeUniform("model", md);
 	while (!glfwWindowShouldClose(window))
 	{
 		glClear(GL_DEPTH_BUFFER_BIT| GL_COLOR_BUFFER_BIT);
 		program->Bind();
-		md = glm::rotate(md, glm::radians(0.1f), glm::vec3(0.0f, 1.0f, 0.0f));
+		md = glm::rotate(md, glm::radians(0.1f), glm::vec3(0.0f, 0.0f, 1.0f));
 		program->ChangeUniform("model", md);
 		model->Draw(*program);
 		program->Unbind();
