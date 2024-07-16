@@ -31,19 +31,11 @@ foreach(SHADER_FILE ${SHADER_FILES})
 endforeach()
 
 #setting all the model files
-file(GLOB SHADER_FILES "${Source_Dir}/Models/armor/*.*")
+file(GLOB SHADER_FILES "${Source_Dir}/Models/soldier/*.*")
 foreach(SHADER_FILE ${SHADER_FILES})
 	get_filename_component(FILE_NAME ${SHADER_FILE} NAME)
-	configure_file(${SHADER_FILE} "${CMAKE_BINARY_DIR}/src/Models/armor/${FILE_NAME}" COPYONLY)
+	configure_file(${SHADER_FILE} "${CMAKE_BINARY_DIR}/src/Models/soldier/${FILE_NAME}" COPYONLY)
 endforeach()
-
-#setting all the model files
-file(GLOB SHADER_FILES "${Source_Dir}/Models/armor/textures/*.*")
-foreach(SHADER_FILE ${SHADER_FILES})
-	get_filename_component(FILE_NAME ${SHADER_FILE} NAME)
-	configure_file(${SHADER_FILE} "${CMAKE_BINARY_DIR}/src/Models/armor/textures/${FILE_NAME}" COPYONLY)
-endforeach()
-
 
 # Add Thirdparties as a subdirectory
 add_subdirectory("${Thirdparty_Dir}/GLFW")
