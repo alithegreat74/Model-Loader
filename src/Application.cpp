@@ -22,14 +22,28 @@ void Application::Start() {
 		return;
 	}
 
+
 	AssetLoader::LoadAssets();
+	glEnable(GL_DEPTH_TEST);
+	glClear(GL_DEPTH_BUFFER_BIT);
+
+	model = new Model("src/Models/armor/armor 2021.obj");
+	program = new ShaderProgram(AssetLoader::GetShader("VertexShader.glsl"), AssetLoader::GetShader("FragmentShader.glsl"));
+	program->Bind();
+	
 }
 
 void Application::Update()
 {
-
+	glm::mat4 md(1.0f);
+	md = glm::translate(md, glm::vec3(0.0f, -1.0f, 0.0f));
+	md = glm::rotate(md, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	md = glm::scale(md, glm::vec3(0.1f, 0.1f, 0.1f));
+	program->ChangeUniform("model", md);
 	while (!glfwWindowShouldClose(window))
 	{
+		glClear(GL_DEPTH_BUFFER_BIT);
+		model->Draw(*program);
 		glfwPollEvents();
 		glfwSwapBuffers(window);
 	}
@@ -37,5 +51,8 @@ void Application::Update()
 
 void Application::CleanUp()
 {
+	delete model;
+	delete program;
 	glfwTerminate();
+
 }

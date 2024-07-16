@@ -8,7 +8,6 @@ class Shader:RendererObject {
 public:
 	//Reads and compiles a shader file
 	Shader(const char* filePath,unsigned int shaderType);
-	~Shader();
 	//Reads the shader file
 	std::string ReadFromFile(const char* filePath);
 	//Checks the Shader's Compilation status

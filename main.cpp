@@ -1,6 +1,5 @@
 #include "Application.h"
-
-int main() {
+int main(){
 	Application::Start();
 	Application::Update();
 	Application::CleanUp();

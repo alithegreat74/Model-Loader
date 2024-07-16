@@ -10,10 +10,6 @@ Shader::Shader(const char* filePath, unsigned int shaderType)
 	ValidateShader();
 }
 
-Shader::~Shader()
-{
-	glDeleteShader(object_id);
-}
 
 std::string Shader::ReadFromFile(const char* filePath)
 {
