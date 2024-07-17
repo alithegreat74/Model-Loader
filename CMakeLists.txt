@@ -10,10 +10,13 @@ set(Thirdparty_Dir "${CMAKE_SOURCE_DIR}/Thirdparty")
 #Getting the source files
 set(Source_Dir "${CMAKE_SOURCE_DIR}/src")
 file(GLOB_RECURSE SRC_FILES "${Source_Dir}/*.cpp")
-
+file(GLOB_RECURSE IMGUI_FILE "${Thirdparty_Dir}/ImGui/*.cpp")
+list(APPEND SRC_FILES ${IMGUI_FILE})
 include_directories(
 	"${Thirdparty_Dir}/Glad/include"
+	"${Thirdparty_Dir}/ImGui"
 	"${Source_Dir}"
+
 )
 
 #setting the vertex shader files

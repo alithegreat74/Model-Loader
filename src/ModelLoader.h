@@ -40,6 +40,7 @@ class Model {
 public:
 	Model(std::string path);
 	void Draw(ShaderProgram& shader);
+	std::string path;
 private:
 	std::vector<Mesh> meshes;
 	std::string directory;

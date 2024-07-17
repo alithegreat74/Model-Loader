@@ -4,6 +4,7 @@
 #include <GLFW/glfw3.h>
 #include "Renderer.h"
 #include "ModelLoader.h"
+#include "UserInterface.h"
 
 namespace Application {
 	static GLFWwindow* window;

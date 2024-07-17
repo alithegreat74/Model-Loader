@@ -63,6 +63,7 @@ void Mesh::SetupMesh()
 
 Model::Model(std::string path)
 {
+	this->path = path;
 	LoadModel(path);
 }
 
@@ -83,7 +84,7 @@ void Model::LoadModel(std::string path)
 		return;
 	}
 
-	directory = path.substr(0, path.find_last_of('/'));
+	directory = path.substr(0, path.find_last_of('\\'));
 	ProcessNode(scene->mRootNode, scene);
 
 }
@@ -169,7 +170,7 @@ unsigned int TextureFromFile(const char* path, const std::string& directory)
 {
 	std::string filename = std::string(path);
 	if(filename.find(':')==filename.npos)
-		filename = directory + "\\" + filename;
+		filename = directory + '/' + filename;
 	unsigned int textureID;
 	glGenTextures(1, &textureID);
 
